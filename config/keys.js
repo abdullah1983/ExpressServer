@@ -1,4 +1,4 @@
 module.exports = {
-  mongoLocal: "mongodb://localhost:27017/<APPNAME>",
+  mongoLocal: "mongodb://localhost:27017/eztrucking",
   secretOrKey: "ThisIsSecretKey"
 };

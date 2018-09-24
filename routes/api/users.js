@@ -52,7 +52,28 @@ router.post("/register", async (req, res) => {
         newUser
           .save()
           .then(user => {
-            return res.status(200).json(user);
+            const payload = {
+              id: user.id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              username: user.username
+            };
+            // Sign The Token
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              {
+                expiresIn: 3600
+              },
+              (err, token) => {
+                if (err) {
+                  res.json({ success: false });
+                } else {
+                  res.json({ success: true, token: "Bearer " + token });
+                }
+              }
+            );
           })
           .catch(err => console.log(err));
       });
